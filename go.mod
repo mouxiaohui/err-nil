@@ -2,10 +2,12 @@ module github.com/mouxiaohui/err-nil
 
 go 1.18
 
-require github.com/urfave/cli/v2 v2.4.0
+require (
+	github.com/briandowns/spinner v1.18.1
+	github.com/urfave/cli/v2 v2.4.0
+)
 
 require (
-	github.com/briandowns/spinner v1.18.1 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/mattn/go-colorable v0.1.2 // indirect
