@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/briandowns/spinner"
@@ -19,10 +20,19 @@ func Run() error {
 	if err != nil {
 		return err
 	}
-	findErrNil(&fileList)
+
+	// 分析所有文件
+	errNilFiles, err := findErrNil(&fileList)
+	if err != nil {
+		return err
+	}
 
 	// 停止加载动画
 	spinner.Stop()
+
+	for _, v := range errNilFiles {
+		fmt.Println(v)
+	}
 
 	return nil
 }
