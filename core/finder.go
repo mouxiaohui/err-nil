@@ -49,19 +49,21 @@ func (e *ErrNilFile) parseFile() error {
 }
 
 // 分析所有文件，查找 `err != nil` 与 `err == nil`
-func findErrNil(fileList *[]string) ([]ErrNilFile, error) {
+func findErrNil(fileList *[]string) ([]ErrNilFile, uint, error) {
+	var total uint
 	if err := generateRegexp(); err != nil {
-		return nil, err
+		return nil, total, err
 	}
 
 	var errNilFiles []ErrNilFile
 	for _, file := range *fileList {
 		errNil := ErrNilFile{path: file}
 		if err := errNil.parseFile(); err != nil {
-			return nil, err
+			return nil, total, err
 		}
+		total += errNil.counter
 		errNilFiles = append(errNilFiles, errNil)
 	}
 
-	return errNilFiles, nil
+	return errNilFiles, total, nil
 }
